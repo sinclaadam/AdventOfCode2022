@@ -18,6 +18,38 @@ public static class DayThree
         return total;
     }
 
+    public static int CalculateBadgePrioritySum(IEnumerable<string> input)
+    {
+        var total = 0;
+        var inputAsArray = input.ToArray();
+        
+        var groupOfRuckSacks = new List<string>();
+        
+        for (var i = 0; i < inputAsArray.Length; i++)
+        {
+            groupOfRuckSacks.Add(inputAsArray[i]);
+            if (groupOfRuckSacks.Count != 3) continue;
+            
+            total += FindPriorityOfCommonItemInRucksacks(groupOfRuckSacks);
+            groupOfRuckSacks.Clear();
+        }
+
+        return total;
+    }
+
+    private static int FindPriorityOfCommonItemInRucksacks(List<string> rucksacks)
+    {
+        var longestLength = rucksacks.Max(x => x.Length);
+        var stringToCheck = rucksacks.First(x => x.Length == longestLength);
+        
+        foreach (var letter in stringToCheck.Where(letter => rucksacks.TrueForAll(x => x.Contains(letter))))
+        {
+            return GetPriority(letter.ToString());
+        }
+
+        throw new Exception();
+    }
+
     private static (string compartmentOne, string compartmentTwo) SplitRuckSack(string input)
     {
         var halfLength = input.Length / 2;

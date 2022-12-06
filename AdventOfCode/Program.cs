@@ -10,4 +10,5 @@ var dayTwoPartTwo = DayTwo.CalculateRockPaperScissorsPartTwo(FileInput.GetAllInp
 Console.WriteLine($"Day Two. Part One: {dayTwoPartOne}. Part Two: {dayTwoPartTwo}");
 
 var dayThreePartOne = DayThree.CalculatePrioritySum(FileInput.GetAllInputLinesForDay(3));
-Console.WriteLine($"Day Three. Part One: {dayThreePartOne}. Part Two: ");
+var dayThreePartTwo = DayThree.CalculateBadgePrioritySum(FileInput.GetAllInputLinesForDay(3));
+Console.WriteLine($"Day Three. Part One: {dayThreePartOne}. Part Two: {dayThreePartTwo}");
