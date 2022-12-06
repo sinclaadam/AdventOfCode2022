@@ -2,17 +2,32 @@
 
 public static class DayOne
 {
-    private static int _maxCalories = 0;
-    
     public static int CalculateElfCarryingMostCalories(IEnumerable<string> inputs)
     {
+        var allCalories = CalculateAllElfCalories(inputs);
+
+        return allCalories.Max();
+    }
+
+    public static int CalculateTopThreeElfCarryingMostCalories(IEnumerable<string> inputs)
+    {
+        var allCalories = CalculateAllElfCalories(inputs);
+        allCalories.Sort();
+
+        return allCalories.TakeLast(3).Sum();
+    }
+
+    private static List<int> CalculateAllElfCalories(IEnumerable<string> inputs)
+    {
+        var allCalories = new List<int>();
+        
         var elfCalorieCount = 0;
         
         foreach (var line in inputs)
         {
             if (string.IsNullOrWhiteSpace(line))
             {
-                CheckElfCalories(elfCalorieCount);
+                allCalories.Add(elfCalorieCount);
                 elfCalorieCount = 0;
             }
             else
@@ -21,14 +36,6 @@ public static class DayOne
             }
         }
 
-        return _maxCalories;
-    }
-
-    private static void CheckElfCalories(int calories)
-    {
-        if (calories > _maxCalories)
-        {
-            _maxCalories = calories;
-        }
+        return allCalories;
     }
 }

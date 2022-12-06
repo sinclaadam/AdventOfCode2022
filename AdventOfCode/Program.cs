@@ -1,8 +1,9 @@
 ﻿using AdventOfCode.Common;
 using AdventOfCode.Days;
 
-var dayOne = DayOne.CalculateElfCarryingMostCalories(FileInput.GetAllInputLinesForDay(1));
-Console.WriteLine($"Day One: {dayOne}");
+var dayOnePartOne = DayOne.CalculateElfCarryingMostCalories(FileInput.GetAllInputLinesForDay(1));
+var dayOnePartTwo = DayOne.CalculateTopThreeElfCarryingMostCalories(FileInput.GetAllInputLinesForDay(1));
+Console.WriteLine($"Day One. Part One: {dayOnePartOne}. Part Two: {dayOnePartTwo}");
 
 var dayTwoPartOne = DayTwo.CalculateRockPaperScissorsPartOne(FileInput.GetAllInputLinesForDay(2));
 var dayTwoPartTwo = DayTwo.CalculateRockPaperScissorsPartTwo(FileInput.GetAllInputLinesForDay(2));
