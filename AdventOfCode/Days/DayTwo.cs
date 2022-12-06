@@ -5,10 +5,15 @@ public static class DayTwo
     private const int LostGameScore = 0;
     private const int DrawGameScore = 3;
     private const int WinGameScore = 6;
-
-    public static int CalculateRockPaperScissorsScore(IEnumerable<string> inputs)
+    
+    public static int CalculateRockPaperScissorsPartOne(IEnumerable<string> inputs)
     {
         return inputs.Sum(CalculateRoundScore);
+    }
+
+    public static int CalculateRockPaperScissorsPartTwo(IEnumerable<string> inputs)
+    {
+        return inputs.Sum(CalculateRoundScorePartTwo);
     }
 
     private static int CalculateRoundScore(string game)
@@ -42,15 +47,53 @@ public static class DayTwo
         };
     }
 
+    private static int CalculateRoundScorePartTwo(string game)
+    {
+        var gameInputs = game.Split(' ');
+        
+        var opponent = ParsePartOnePlay(gameInputs[0]);
+
+        var gameResult = ParseGameResult(gameInputs[1]);
+
+        return GetPointsForGamePartTwo(opponent, gameResult);
+
+    }
+
+    private static GameResult ParseGameResult(string letter)
+    {
+        return letter switch
+        {
+            "X" => GameResult.Lose,
+            "Y" => GameResult.Draw,
+            "Z" => GameResult.Win,
+            _ => throw new Exception()
+        };
+    }
+
+    private static int GetPointsForGamePartTwo(RockPaperScissors opponent, GameResult gameResult)
+    {
+        return gameResult switch
+        {
+            GameResult.Draw => Convert.ToInt32(GameResult.Draw) + Convert.ToInt32(opponent),
+            GameResult.Win when opponent == RockPaperScissors.Rock => Convert.ToInt32(GameResult.Win) + Convert.ToInt32(RockPaperScissors.Paper),
+            GameResult.Win when opponent == RockPaperScissors.Paper => Convert.ToInt32(GameResult.Win) + Convert.ToInt32(RockPaperScissors.Scissors),
+            GameResult.Win when opponent == RockPaperScissors.Scissors => Convert.ToInt32(GameResult.Win) + Convert.ToInt32(RockPaperScissors.Rock),
+            GameResult.Lose when opponent == RockPaperScissors.Rock => Convert.ToInt32(GameResult.Lose) + Convert.ToInt32(RockPaperScissors.Scissors),
+            GameResult.Lose when opponent == RockPaperScissors.Paper => Convert.ToInt32(GameResult.Lose) + Convert.ToInt32(RockPaperScissors.Rock),
+            GameResult.Lose when opponent == RockPaperScissors.Scissors => Convert.ToInt32(GameResult.Lose) + Convert.ToInt32(RockPaperScissors.Paper),
+            _ => throw new Exception()
+        };
+    }
+
     private static (RockPaperScissors opponent, RockPaperScissors you) GetHandPlayed(string game)
     {
         var hand = game.Split(' ');
-        var opponent = ParsePlay(hand[0]);
-        var you = ParsePlay(hand[1]);
+        var opponent = ParsePartOnePlay(hand[0]);
+        var you = ParsePartOnePlay(hand[1]);
         return (opponent, you);
     }
 
-    private static RockPaperScissors ParsePlay(string s)
+    private static RockPaperScissors ParsePartOnePlay(string s)
     {
         switch (s)
         {
@@ -69,5 +112,12 @@ public static class DayTwo
         Rock = 1,
         Paper = 2,
         Scissors = 3
+    }
+
+    private enum GameResult
+    {
+        Lose = 0,
+        Draw = 3,
+        Win = 6
     }
 }
