@@ -1,25 +1,18 @@
-﻿using AdventOfCode.Common;
-
-namespace AdventOfCode.Days;
+﻿namespace AdventOfCode.Days;
 
 public static class DayOne
 {
-    private static int _elfWithMax = 0;
     private static int _maxCalories = 0;
     
-    public static void CalculateElfCarryingMostCalories()
+    public static int CalculateElfCarryingMostCalories(IEnumerable<string> inputs)
     {
-        var input = FileInput.GetAllInputLinesForDay(1);
-
-        var elfNumber = 1;
         var elfCalorieCount = 0;
         
-        foreach (var line in input)
+        foreach (var line in inputs)
         {
             if (string.IsNullOrWhiteSpace(line))
             {
-                CheckElfCalories(elfNumber, elfCalorieCount);
-                elfNumber++;
+                CheckElfCalories(elfCalorieCount);
                 elfCalorieCount = 0;
             }
             else
@@ -28,14 +21,13 @@ public static class DayOne
             }
         }
 
-        Console.WriteLine($"Day One Answer: Elf {_elfWithMax} has the maximum with {_maxCalories} calories");
+        return _maxCalories;
     }
 
-    private static void CheckElfCalories(int elfNumber, int calories)
+    private static void CheckElfCalories(int calories)
     {
         if (calories > _maxCalories)
         {
-            _elfWithMax = elfNumber;
             _maxCalories = calories;
         }
     }

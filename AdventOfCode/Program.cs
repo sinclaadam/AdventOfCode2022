@@ -1,5 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿using AdventOfCode.Common;
 using AdventOfCode.Days;
 
-DayOne.CalculateElfCarryingMostCalories();
+var dayOne = DayOne.CalculateElfCarryingMostCalories(FileInput.GetAllInputLinesForDay(1));
+Console.WriteLine($"Day One: {dayOne}");
+
+var dayTwo = DayTwo.CalculateRockPaperScissorsScore(FileInput.GetAllInputLinesForDay(2));
+Console.WriteLine($"Day Two: {dayTwo}");
