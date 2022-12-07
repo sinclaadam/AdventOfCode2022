@@ -16,3 +16,7 @@ Console.WriteLine($"Day Three. Part One: {dayThreePartOne}. Part Two: {dayThreeP
 var dayFourPartOne = DayFour.CalculateFullyContainedPairs(FileInput.GetAllInputLinesForDay(4));
 var dayFourPartTwo = DayFour.CalculateOverlappingPairs(FileInput.GetAllInputLinesForDay(4));
 Console.WriteLine($"Day Four. Part One: {dayFourPartOne}. Part Two: {dayFourPartTwo}.");
+
+var dayFivePartOne = DayFive.CalculateCrateOnTopPartOne(FileInput.GetAllInputLinesForDay(5));
+var dayFivePartTwo = DayFive.CalculateCrateOnTopPartTwo(FileInput.GetAllInputLinesForDay(5));
+Console.WriteLine($"Day Five. Part One: {dayFivePartOne}. Part Two: {dayFivePartTwo}.");
