@@ -20,3 +20,7 @@ Console.WriteLine($"Day Four. Part One: {dayFourPartOne}. Part Two: {dayFourPart
 var dayFivePartOne = DayFive.CalculateCrateOnTopPartOne(FileInput.GetAllInputLinesForDay(5));
 var dayFivePartTwo = DayFive.CalculateCrateOnTopPartTwo(FileInput.GetAllInputLinesForDay(5));
 Console.WriteLine($"Day Five. Part One: {dayFivePartOne}. Part Two: {dayFivePartTwo}.");
+
+var daySixPartOne = DaySix.ReportStartOfPacketMarker(FileInput.GetSingleLineInput(6));
+var daySixPartTwo = DaySix.ReportStartOfMessageMarker(FileInput.GetSingleLineInput(6));
+Console.WriteLine($"Day Six. Part One: {daySixPartOne}. Part Two: {daySixPartTwo}.");

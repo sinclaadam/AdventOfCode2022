@@ -8,4 +8,11 @@ public static class FileInput
 
         return File.ReadAllLines(path);
     }
+
+    public static string GetSingleLineInput(int day)
+    {
+        var path = Path.Combine("Inputs", $"{day}.txt");
+
+        return File.ReadAllText(path);
+    }
 }
