@@ -24,3 +24,7 @@ Console.WriteLine($"Day Five. Part One: {dayFivePartOne}. Part Two: {dayFivePart
 var daySixPartOne = DaySix.ReportStartOfPacketMarker(FileInput.GetSingleLineInput(6));
 var daySixPartTwo = DaySix.ReportStartOfMessageMarker(FileInput.GetSingleLineInput(6));
 Console.WriteLine($"Day Six. Part One: {daySixPartOne}. Part Two: {daySixPartTwo}.");
+
+var daySevenPartOne = DaySeven.SumDirectoriesUnderThreshold(FileInput.GetAllInputLinesForDay(7));
+var daySevenPartTwo = DaySeven.FindClosestSizeDirectoryOverThreshold(FileInput.GetAllInputLinesForDay(7));
+Console.WriteLine($"Day Seven. Part One: {daySevenPartOne}. Part Two: {daySevenPartTwo}.");
