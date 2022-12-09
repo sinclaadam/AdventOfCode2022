@@ -32,3 +32,6 @@ Console.WriteLine($"Day Seven. Part One: {daySevenPartOne}. Part Two: {daySevenP
 var dayEightPartOne = DayEight.CountVisibleTrees(FileInput.GetAllInputLinesForDay(8));
 var dayEightPartTwo = DayEight.GetBestScenicScore(FileInput.GetAllInputLinesForDay(8));
 Console.WriteLine($"Day Eight. Part One: {dayEightPartOne}. Part Two: {dayEightPartTwo}.");
+
+var dayNinePartOne = DayNine.FindUniquePositionsVisitedByTail(FileInput.GetAllInputLinesForDay(9));
+Console.WriteLine($"Day Nine. Part One: {dayNinePartOne}. Part Two: .");

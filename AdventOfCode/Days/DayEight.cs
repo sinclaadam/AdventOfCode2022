@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Days;
+﻿using AdventOfCode.Common;
+
+namespace AdventOfCode.Days;
 
 public static class DayEight
 {
@@ -25,9 +27,9 @@ public static class DayEight
             for (var col = 0; col < forest.GetLength(1); col++)
             {
                 var tree = forest[row, col];
-                if (tree.Visible[Direction.Top]
+                if (tree.Visible[Direction.Up]
                     || tree.Visible[Direction.Left]
-                    || tree.Visible[Direction.Bottom]
+                    || tree.Visible[Direction.Down]
                     || tree.Visible[Direction.Right]) total++;
             }
         }
@@ -102,7 +104,7 @@ public static class DayEight
             }
         }
         
-        tree.Visible.Add(Direction.Top, visible);
+        tree.Visible.Add(Direction.Up, visible);
         return count;
     }
     
@@ -123,7 +125,7 @@ public static class DayEight
             }
         }
         
-        tree.Visible.Add(Direction.Bottom, visible);
+        tree.Visible.Add(Direction.Down, visible);
         return count;
     }
     
@@ -173,14 +175,6 @@ public static class DayEight
     {
         public int Size { get; set; }
         public Dictionary<Direction, bool> Visible { get; } = new();
-    }
-
-    private enum Direction
-    {
-        Top,
-        Bottom,
-        Left,
-        Right
     }
 
     private static bool IsBiggerThan(this Tree first, Tree second)
