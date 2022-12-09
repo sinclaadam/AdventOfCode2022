@@ -28,3 +28,7 @@ Console.WriteLine($"Day Six. Part One: {daySixPartOne}. Part Two: {daySixPartTwo
 var daySevenPartOne = DaySeven.SumDirectoriesUnderThreshold(FileInput.GetAllInputLinesForDay(7));
 var daySevenPartTwo = DaySeven.FindClosestSizeDirectoryOverThreshold(FileInput.GetAllInputLinesForDay(7));
 Console.WriteLine($"Day Seven. Part One: {daySevenPartOne}. Part Two: {daySevenPartTwo}.");
+
+var dayEightPartOne = DayEight.CountVisibleTrees(FileInput.GetAllInputLinesForDay(8));
+var dayEightPartTwo = DayEight.GetBestScenicScore(FileInput.GetAllInputLinesForDay(8));
+Console.WriteLine($"Day Eight. Part One: {dayEightPartOne}. Part Two: {dayEightPartTwo}.");
