@@ -18,10 +18,22 @@ public class DayNineTests
         "R 2"
     };
     
+    private IEnumerable<string> largerExampleData = new[]
+    {
+        "R 5",
+        "U 8",
+        "L 8",
+        "D 3",
+        "R 17",
+        "D 10",
+        "L 25",
+        "U 20"
+    };
+    
     [Fact]
     public void Given_Example_When_Processed_Gives_Correct_Answer_For_Part_One()
     {
-        var actual = DayNine.FindUniquePositionsVisitedByTail(exampleData);
+        var actual = DayNine.FindUniquePositionsVisitedByTail(exampleData, 1);
         
         Assert.Equal(13, actual);
     }
@@ -29,6 +41,16 @@ public class DayNineTests
     [Fact]
     public void Given_Example_When_Processed_Gives_Correct_Answer_For_Part_Two()
     {
+        var actual = DayNine.FindUniquePositionsVisitedByTail(exampleData, 9);
+
+        Assert.Equal(1, actual);
+    }
+    
+    [Fact]
+    public void Given_Larger_Example_When_Processed_Gives_Correct_Answer_For_Part_Two()
+    {
+        var actual = DayNine.FindUniquePositionsVisitedByTail(largerExampleData, 9);
         
+        Assert.Equal(36, actual);
     }
 }
