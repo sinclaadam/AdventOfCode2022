@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AdventOfCode.Days;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace AdventOfCodeTests.Days;
 
 public class DayTenTests
 {
+    private readonly ITestOutputHelper _testOutputHelper;
+
     private IEnumerable<string> exampleData = new[]
     {
         "addx 15",
@@ -160,7 +164,24 @@ public class DayTenTests
     public void Given_Example_When_Processed_Gives_Correct_Answer_For_Part_One()
     {
         var actual = DayTen.SumSignalStrengths(exampleData);
-        
+
         Assert.Equal(13140, actual);
+    }
+
+    [Fact]
+    public void Given_Example_When_Processed_Gives_Correct_Answer_For_Part_Two()
+    {
+        var actual = DayTen.DrawPicture(exampleData);
+
+        var expected = 
+            @"##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######.....
+";
+
+        Assert.Equal(expected, actual);
     }
 }

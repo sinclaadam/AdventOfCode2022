@@ -1,13 +1,60 @@
-﻿namespace AdventOfCode.Days;
+﻿using System.Text;
+
+namespace AdventOfCode.Days;
 
 public static class DayTen
 {
+    private const int CrtPixelsPerRow = 40;
     public static int SumSignalStrengths(IEnumerable<string> input)
     {
         var instructionQueue = ParseInstructions(input);
         var sum = RunInstructionSet(instructionQueue);
         
         return sum;
+    }
+    
+    public static string DrawPicture(IEnumerable<string> input)
+    {
+        var instructionQueue = ParseInstructions(input);
+        var picture = DrawInstructionSet(instructionQueue);
+        return picture;
+    }
+    
+    private static string DrawInstructionSet(Queue<(Instruction instruction, int value)> instructionQueue)
+    {
+        var registerX = 1;
+        var picture = new StringBuilder();
+        var instructionCompleteOnCycle = -1;
+        
+        (Instruction instruction, int value)? currentInstruction = null;
+        
+        for (var cycle = 1;  cycle <= 240; cycle++)
+        {
+            if (currentInstruction is null)
+            {
+                currentInstruction = instructionQueue.Dequeue();
+                instructionCompleteOnCycle = cycle + GetCyclesToComplete(currentInstruction.Value.instruction) - 1;
+            }
+            
+            picture.Append(CheckPixelDrawn(registerX, cycle));
+            if (cycle % CrtPixelsPerRow == 0) picture.AppendLine();
+
+            if (cycle == instructionCompleteOnCycle)
+            {
+                CompleteInstruction(ref registerX, ref currentInstruction);
+            }
+        }
+
+        return picture.ToString();
+    }
+
+    private static string CheckPixelDrawn(int register, int cycle)
+    {
+        var pixel = cycle - 1;
+        pixel %= CrtPixelsPerRow;
+        
+        if (register <= pixel + 1 && register >= pixel - 1) return "#";
+        return ".";
     }
 
     private static int RunInstructionSet(Queue<(Instruction instruction, int value)> instructionQueue)
@@ -17,14 +64,20 @@ public static class DayTen
         var instructionCompleteOnCycle = -1;
         (Instruction, int)? currentInstruction = null;
         
-        for (var cycle = 0; instructionQueue.Count > 0; cycle++)
+        for (var cycle = 1; cycle <= 240; cycle++)
         {
-            sum += CheckCycleToSum(cycle, registerX);
-            if (cycle < instructionCompleteOnCycle) continue;
+            if (currentInstruction is null)
+            {
+                currentInstruction = instructionQueue.Dequeue();
+                instructionCompleteOnCycle = cycle + GetCyclesToComplete(currentInstruction.Value.Item1) - 1;
+            }
             
-            CompleteInstruction(ref registerX, currentInstruction);
-            currentInstruction = instructionQueue.Dequeue();
-            instructionCompleteOnCycle = cycle + GetCyclesToComplete(currentInstruction.Value.Item1);
+            sum += CheckCycleToSum(cycle, registerX);
+
+            if (cycle == instructionCompleteOnCycle)
+            {
+                CompleteInstruction(ref registerX, ref currentInstruction);
+            }
         }
 
         return sum;
@@ -54,7 +107,7 @@ public static class DayTen
         };
     }
 
-    private static void CompleteInstruction(ref int register, (Instruction instruction, int value)? instruction)
+    private static void CompleteInstruction(ref int register, ref (Instruction instruction, int value)? instruction)
     {
         if (instruction == null) return;
         
@@ -62,6 +115,8 @@ public static class DayTen
         {
             register += instruction.Value.value;
         }
+
+        instruction = null;
     }
 
     private static Queue<(Instruction, int)> ParseInstructions(IEnumerable<string> input)

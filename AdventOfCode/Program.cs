@@ -38,4 +38,5 @@ var dayNinePartTwo = DayNine.FindUniquePositionsVisitedByTail(FileInput.GetAllIn
 Console.WriteLine($"Day Nine. Part One: {dayNinePartOne}. Part Two: {dayNinePartTwo}.");
 
 var dayTenPartOne = DayTen.SumSignalStrengths(FileInput.GetAllInputLinesForDay(10));
-Console.WriteLine($"Day Ten. Part One: {dayTenPartOne}. Part Two:.");
+var dayTenPartTwo = DayTen.DrawPicture(FileInput.GetAllInputLinesForDay(10));
+Console.WriteLine($"Day Ten. Part One: {dayTenPartOne}. Part Two:{Environment.NewLine}{dayTenPartTwo}");
