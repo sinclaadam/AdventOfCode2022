@@ -44,3 +44,6 @@ Console.WriteLine($"Day Ten. Part One: {dayTenPartOne}. Part Two:{Environment.Ne
 var dayElevenPartOne = DayEleven.CalculateMonkeyBusiness(FileInput.GetAllInputLinesForDay(11));
 var dayElevenPartTwo = DayEleven.CalculateMonkeyBusinessPartTwo(FileInput.GetAllInputLinesForDay(11));
 Console.WriteLine($"Day Eleven. Part One: {dayElevenPartOne}. Part Two: {dayElevenPartTwo}.");
+
+var dayTwelvePartOne = DayTwelve.FindSmallestPathNumber(FileInput.GetAllInputLinesForDay(12));
+Console.WriteLine($"Day Twelve. Part One: {dayTwelvePartOne}. Part Two: .");
