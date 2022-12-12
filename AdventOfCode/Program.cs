@@ -40,3 +40,7 @@ Console.WriteLine($"Day Nine. Part One: {dayNinePartOne}. Part Two: {dayNinePart
 var dayTenPartOne = DayTen.SumSignalStrengths(FileInput.GetAllInputLinesForDay(10));
 var dayTenPartTwo = DayTen.DrawPicture(FileInput.GetAllInputLinesForDay(10));
 Console.WriteLine($"Day Ten. Part One: {dayTenPartOne}. Part Two:{Environment.NewLine}{dayTenPartTwo}");
+
+var dayElevenPartOne = DayEleven.CalculateMonkeyBusiness(FileInput.GetAllInputLinesForDay(11));
+var dayElevenPartTwo = DayEleven.CalculateMonkeyBusinessPartTwo(FileInput.GetAllInputLinesForDay(11));
+Console.WriteLine($"Day Eleven. Part One: {dayElevenPartOne}. Part Two: {dayElevenPartTwo}.");
