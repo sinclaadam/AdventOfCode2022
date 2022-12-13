@@ -7,15 +7,23 @@ public static class DayTwelve
     public static int FindSmallestPathNumber(IEnumerable<string> input)
     {
         var grid = ParseGrid(input);
-        var path = FindSmallestPath(grid);
+        var path = FindSmallestPath(grid, false);
+        var answer = CountNodes(path);
+        return answer;
+    }
+    
+    public static int FindSmallestPathNumberFromAllLowElevations(IEnumerable<string> input)
+    {
+        var grid = ParseGrid(input);
+        var path = FindSmallestPath(grid, true);
         var answer = CountNodes(path);
         return answer;
     }
 
-    private static Node<(int row, int col)> FindSmallestPath(char[,] grid)
+    private static Node<(int row, int col)> FindSmallestPath(char[,] grid, bool allLocations)
     {
-        var startLocation = GetLocation(grid, 'S');
-        var endLocation = GetLocation(grid, 'E');
+        var startLocation = GetLocations(grid, 'S').First();
+        var endLocation = GetLocations(grid, 'E').First();
 
         grid[startLocation.row, startLocation.col] = 'a';
         grid[endLocation.row, endLocation.col] = 'z';
@@ -29,9 +37,29 @@ public static class DayTwelve
             HeuristicToGoal = CalculateManhattanDistanceHeuristic(startLocation, endLocation),
             PreviousItem = null
         };
-
+        
         var fringe = new PriorityQueue<Node<(int row, int col)>, int>();
-        fringe.Enqueue(start, start.EstimatedDistance);
+        
+        if (allLocations)
+        {
+            var startingLocations = GetLocations(grid, 'a');
+            var startingNodes = startingLocations.Select(x => new Node<(int row, int col)>
+            {
+                Item = (x.row, x.col),
+                CostSoFar = 0,
+                HeuristicToGoal = CalculateManhattanDistanceHeuristic(x, endLocation),
+                PreviousItem = null
+            });
+            
+            foreach (var startingNode in startingNodes)
+            {
+                fringe.Enqueue(startingNode, startingNode.EstimatedDistance);
+            }
+        }
+        else
+        {
+            fringe.Enqueue(start, start.EstimatedDistance);
+        }
 
         var visited = new HashSet<(int row, int col)>();
         
@@ -160,17 +188,19 @@ public static class DayTwelve
         return heightMap;
     }
 
-    private static (int row, int col) GetLocation(char[,] grid, char find)
+    private static List<(int row, int col)> GetLocations(char[,] grid, char find)
     {
+        var locations = new List<(int row, int col)>();
+        
         for (var row = 0; row < grid.GetLength(0); row++)
         {
             for (var col = 0; col < grid.GetLength(1); col++)
             {
-                if (grid[row, col] == find) return (row, col);
+                if (grid[row, col] == find) locations.Add((row, col));
             }
         }
 
-        throw new Exception($"{find} was not found in the grid.");
+        return locations;
     }
 
     private static void DrawGrid(char[,] grid)
