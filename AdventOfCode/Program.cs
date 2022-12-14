@@ -48,3 +48,6 @@ Console.WriteLine($"Day Eleven. Part One: {dayElevenPartOne}. Part Two: {dayElev
 var dayTwelvePartOne = DayTwelve.FindSmallestPathNumber(FileInput.GetAllInputLinesForDay(12));
 var dayTwelvePartTwo = DayTwelve.FindSmallestPathNumberFromAllLowElevations(FileInput.GetAllInputLinesForDay(12));
 Console.WriteLine($"Day Twelve. Part One: {dayTwelvePartOne}. Part Two: {dayTwelvePartTwo}.");
+
+var dayThirteenPartOne = DayThirteen.SumValidIndices(FileInput.GetAllInputLinesForDay(13));
+Console.WriteLine($"Day Thirteen. Part One: {dayThirteenPartOne}. Part Two: .");
