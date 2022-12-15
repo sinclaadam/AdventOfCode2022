@@ -75,5 +75,13 @@ public class DayThirteenTests
 
         Assert.Equal(23, actual);
     }
+    
+    [Fact]
+    public void Given_Example_When_Processed_Gives_Correct_Answer_For_Part_Two()
+    {
+        var actual = DayThirteen.CalculateDecoderKey(exampleData);
+
+        Assert.Equal(140, actual);
+    }
 
 }

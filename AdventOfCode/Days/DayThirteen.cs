@@ -18,6 +18,34 @@ public static class DayThirteen
         return sum;
     }
 
+    public static int CalculateDecoderKey(IEnumerable<string> input)
+    {
+        var inputs = input.ToList();
+        inputs.RemoveAll(string.IsNullOrWhiteSpace);
+        
+        //Secret decoder packets
+        inputs.Add("[[2]]");
+        inputs.Add("[[6]]");
+        
+        var allNodes = inputs.Select(ParseSingleItem).ToList();
+        allNodes.Sort((n1, n2) =>
+        {
+            var result = CompareArrays(n1.AsArray(), n2.AsArray());
+            return result switch
+            {
+                Result.CorrectOrder => -1,
+                Result.IncorrectOrder => 1,
+                Result.NoResult => 0,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        });
+        
+        var indexOne = allNodes.ToList().FindIndex(x => x.ToString().Equals(ParseSingleItem("[[2]]").ToString())) + 1;
+        var indexTwo = allNodes.ToList().FindIndex(x => x.ToString().Equals(ParseSingleItem("[[6]]").ToString())) + 1;
+
+        return indexOne * indexTwo;
+    }
+
     private static bool IsCorrectOrder(JsonNode left, JsonNode right)
     {
         var result = CompareArrays(left.AsArray(), right.AsArray());
@@ -98,6 +126,11 @@ public static class DayThirteen
         }
 
         return pairs;
+    }
+
+    private static JsonNode ParseSingleItem(string line)
+    {
+        return JsonNode.Parse(line)!;
     }
 
     private enum Result

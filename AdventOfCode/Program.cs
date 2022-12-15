@@ -50,4 +50,5 @@ var dayTwelvePartTwo = DayTwelve.FindSmallestPathNumberFromAllLowElevations(File
 Console.WriteLine($"Day Twelve. Part One: {dayTwelvePartOne}. Part Two: {dayTwelvePartTwo}.");
 
 var dayThirteenPartOne = DayThirteen.SumValidIndices(FileInput.GetAllInputLinesForDay(13));
-Console.WriteLine($"Day Thirteen. Part One: {dayThirteenPartOne}. Part Two: .");
+var dayThirteenPartTwo = DayThirteen.CalculateDecoderKey(FileInput.GetAllInputLinesForDay(13));
+Console.WriteLine($"Day Thirteen. Part One: {dayThirteenPartOne}. Part Two: {dayThirteenPartTwo}.");
